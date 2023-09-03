@@ -6,7 +6,7 @@ app = Flask(__name__)
 # set up root route
 @app.route("/")
 def hello_world():
-	return "Hello World"
+	return "Hello World New"
 
 # Get the PORT from environment
 port = os.getenv('PORT', '8080')
