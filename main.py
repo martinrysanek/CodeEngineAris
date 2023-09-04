@@ -22,9 +22,12 @@ def find_and_display_attributes(element, tag_name):
 
 # set up root route
 @app.route("/")
-def aris():
-  url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=14890992'
-  response = urllib.request.urlopen(url)
+def aris(ico):
+  # url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=14890992'
+  url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico='
+  if not ico.isdigit():
+      return "Not valid ICO format"
+  response = urllib.request.urlopen(url+ico.strip())
   data = response.read()
   # Parse the XML string
   root = ET.fromstring(data)
