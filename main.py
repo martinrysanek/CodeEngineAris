@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import xml.etree.ElementTree as ET
 import urllib.request
 import os
@@ -21,10 +21,11 @@ def find_and_display_attributes(element, tag_name):
     return "Unknown"
 
 # set up root route
-@app.route("/<ico_string>", methods=['GET'])
-def aris(ico_string):
+@app.route("/", methods=['GET'])
+def aris():
   # url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=14890992'
   url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico='
+  ico_string = request.args.get('ico')  
   if not ico_string.isdigit():
       return "Not valid ICO format"
   response = urllib.request.urlopen(url+ico_string.strip())
@@ -39,3 +40,5 @@ def aris(ico_string):
 port = os.getenv('PORT', '8080')
 if __name__ == "__main__":
 	app.run(host='0.0.0.0',port=int(port))
+
+
