@@ -57,7 +57,7 @@ def aris():
   # url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=14890992'
   url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico='
   ico_string = request.args.get('ico')  
-  if not ico_string.isdigit():
+  if not (type(my_variable) is str and ico_string.isdigit()):
       return "Not valid ICO format"
   logger.debug("ICO: " + ico_string)
   response = urllib.request.urlopen(url+ico_string.strip())
