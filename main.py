@@ -76,6 +76,7 @@ logger = logging.getLogger(__name__)
 # Create a custom logging handler to capture log messages in a string
 string_handler = StringHandler()
 logger.addHandler(string_handler)
+logger.propagate = False
 
 # Log some messages
 logger.debug("This is a debug message")
