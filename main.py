@@ -5,6 +5,19 @@ import os
 
 app = Flask(__name__)
 
+import logging
+
+class StringHandler(logging.Handler):
+    def __init__(self):
+        super().__init__()
+        self.log_output = ""
+
+    def emit(self, record):
+        log_message = self.format(record)
+        self.log_output += log_message + "\n"
+
+
+
 # Function to traverse the entire XML tree and display attributes of a given tag name
 def find_and_display_attributes(element, tag_name):
     if element.tag.endswith(tag_name):
@@ -20,21 +33,52 @@ def find_and_display_attributes(element, tag_name):
             return name
     return "Unknown"
 
+
+# set up root route
+@app.route("/log", methods=['GET'])
+def log():
+    global string_handler
+    # Retrieve the log messages as a single string
+    return (string_handler.log_output)
+
 # set up root route
 @app.route("/", methods=['GET'])
 def aris():
+  logger.debug("GET /")
   # url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=14890992'
   url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico='
   ico_string = request.args.get('ico')  
   if not ico_string.isdigit():
       return "Not valid ICO format"
+  logger.debug("ICO: " + ico_string)
   response = urllib.request.urlopen(url+ico_string.strip())
   data = response.read()
   # Parse the XML string
   root = ET.fromstring(data)
   # Example: Display all attributes for the 'person' tag throughout the XML tree
   name = find_and_display_attributes(root, 'OF')
+  logger.debug("NAME: " + name)
   return name
+
+# Create a logger
+logger = logging.getLogger(__name__)
+
+# Create a custom logging handler to capture log messages in a string
+string_handler = StringHandler()
+logger.addHandler(string_handler)
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+)
+
+# Log some messages
+logger.debug("This is a debug message")
+logger.info("This is an info message")
+logger.warning("This is a warning message")
+logger.error("This is an error message")
+logger.critical("This is a critical message")
 
 # Get the PORT from environment
 port = os.getenv('PORT', '8080')
