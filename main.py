@@ -15,8 +15,14 @@ class StringHandler(logging.Handler):
     def emit(self, record):
         log_message = self.format(record)
         self.log_output += log_message + "\n"
-
-
+        
+class CustomFormatter(logging.Formatter):
+    def format(self, record):
+        # Get the current timestamp in a specific format
+        timestamp = self.formatTime(record, datefmt='%Y-%m-%d %H:%M:%S')
+        # custom_format = f"[{timestamp}] [{record.levelname}] {record.name}: {record.message}"
+        custom_format = f"[{timestamp}] [{record.levelname}]: {record.message} <BR>"
+        return custom_format
 
 # Function to traverse the entire XML tree and display attributes of a given tag name
 def find_and_display_attributes(element, tag_name):
@@ -64,23 +70,26 @@ def aris():
   return name
 
 # Configure logging with a custom log message format
-logging.basicConfig(
-    level=logging.DEBUG,  # Set the minimum log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'  # Format for the timestamp
-)
+# logging.basicConfig(
+#     level=logging.DEBUG,  # Set the minimum log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+#     datefmt='%Y-%m-%d %H:%M:%S'  # Format for the timestamp
+# )
 
 # Create a logger
 logger = logging.getLogger(__name__)
 
+# Create a custom formatter
+custom_formatter = CustomFormatter()
+
 # Create a custom logging handler to capture log messages in a string
 string_handler = StringHandler()
+string_handler.setFormatter(custom_formatter)
 logger.addHandler(string_handler)
-logger.propagate = False
 
 # Log some messages
 logger.debug("This is a debug message")
-# logger.info("This is an info message")
+logger.info("This is an info message")
 # logger.warning("This is a warning message")
 # logger.error("This is an error message")
 # logger.critical("This is a critical message")
