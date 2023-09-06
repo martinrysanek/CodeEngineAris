@@ -46,6 +46,7 @@ def log():
 # set up root route
 @app.route("/", methods=['GET'])
 def aris():
+  global logger
   logger.debug("GET /")
   # url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=14890992'
   url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico='
@@ -62,10 +63,11 @@ def aris():
   logger.debug("NAME: " + name)
   return name
 
-# Configure logging
+# Configure logging with a custom log message format
 logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s\n<BR>',
+    level=logging.DEBUG,  # Set the minimum log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'  # Format for the timestamp
 )
 
 # Create a logger
