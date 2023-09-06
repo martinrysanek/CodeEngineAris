@@ -70,7 +70,7 @@ logger.addHandler(string_handler)
 # Configure logging
 logging.basicConfig(
     level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s\n',
 )
 
 # Log some messages
