@@ -67,7 +67,8 @@ def aris():
   # Example: Display all attributes for the 'person' tag throughout the XML tree
   name = find_and_display_attributes(root, 'OF')
   logger.info("NAME: " + name)
-  return name
+  response_data = {'name': name}
+  return jsonify(response_data)
 
 # Configure logging with a custom log message format
 logging.basicConfig(
