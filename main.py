@@ -20,7 +20,7 @@ class CustomFormatter(logging.Formatter):
     def format(self, record):
         # Get the current timestamp in a specific format
         timestamp = self.formatTime(record, datefmt='%Y-%m-%d %H:%M:%S')
-        # custom_format = f"[{timestamp}] [{record.levelname}] {record.name}: {record.message}"
+        # custom_format = f"[{timestamp}] [{record.levelname}] {record.name}: {record.getMessage()}"
         custom_format = f"[{timestamp}] [{record.levelname}]: {record.message} <BR>"
         return custom_format
 
