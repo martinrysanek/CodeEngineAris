@@ -53,21 +53,25 @@ def log():
 @app.route("/", methods=['GET'])
 def aris():
   global logger
+  
   logger.debug("GET /")
   # url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico=14890992'
   url = 'https://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi?ico='
+  
   ico_string = request.args.get('ico')  
   if not (type(ico_string) is str and ico_string.isdigit()):
-      return "Not valid ICO format"
-  logger.info("ICO: " + ico_string)
-  response = urllib.request.urlopen(url+ico_string.strip())
-  data = response.read()
-  # Parse the XML string
-  root = ET.fromstring(data)
-  # Example: Display all attributes for the 'person' tag throughout the XML tree
-  name = find_and_display_attributes(root, 'OF')
-  logger.info("NAME: " + name)
-  response_data = {'name': name}
+      return_name = "Not valid ICO format"
+  else:
+      logger.info("ICO: " + ico_string)
+      response = urllib.request.urlopen(url+ico_string.strip())
+      data = response.read()
+      # Parse the XML string
+      root = ET.fromstring(data)
+      # Example: Display all attributes for the 'person' tag throughout the XML tree
+      return_name = find_and_display_attributes(root, 'OF')
+      
+  logger.info("NAME: " + return_name )
+  response_data = {'name': return_name }
   return jsonify(response_data)
 
 # Configure logging with a custom log message format
