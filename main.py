@@ -70,11 +70,11 @@ def aris():
   return name
 
 # Configure logging with a custom log message format
-# logging.basicConfig(
-#     level=logging.DEBUG,  # Set the minimum log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-#     datefmt='%Y-%m-%d %H:%M:%S'  # Format for the timestamp
-# )
+logging.basicConfig(
+    level=logging.DEBUG,  # Set the minimum log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'  # Format for the timestamp
+)
 
 # Create a logger
 logger = logging.getLogger(__name__)
