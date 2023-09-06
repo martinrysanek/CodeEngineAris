@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify
 import xml.etree.ElementTree as ET
 import urllib.request
 import os
+import logging
 
 app = Flask(__name__)
 
-import logging
 
 class StringHandler(logging.Handler):
     def __init__(self):
@@ -89,11 +89,7 @@ string_handler.setFormatter(custom_formatter)
 logger.addHandler(string_handler)
 
 # Log some messages
-# logger.debug("This is a debug message")
 logger.info("Custom Extension of Watson Assistant to get information from ARES")
-# logger.warning("This is a warning message")
-# logger.error("This is an error message")
-# logger.critical("This is a critical message")
 
 # Get the PORT from environment
 port = os.getenv('PORT', '8080')
