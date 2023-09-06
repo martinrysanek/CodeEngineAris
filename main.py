@@ -21,7 +21,7 @@ class CustomFormatter(logging.Formatter):
         # Get the current timestamp in a specific format
         timestamp = self.formatTime(record, datefmt='%Y-%m-%d %H:%M:%S')
         # custom_format = f"[{timestamp}] [{record.levelname}] {record.name}: {record.getMessage()}"
-        custom_format = f"[{timestamp}] [{record.levelname}]: {record.message} <BR>"
+        custom_format = f"[{timestamp}] [{record.levelname}]: {record.getMessage()} <BR>"
         return custom_format
 
 # Function to traverse the entire XML tree and display attributes of a given tag name
