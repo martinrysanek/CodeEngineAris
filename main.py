@@ -62,18 +62,18 @@ def aris():
   logger.debug("NAME: " + name)
   return name
 
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s\n<BR>',
+)
+
 # Create a logger
 logger = logging.getLogger(__name__)
 
 # Create a custom logging handler to capture log messages in a string
 string_handler = StringHandler()
 logger.addHandler(string_handler)
-
-# Configure logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s\n<BR>',
-)
 
 # Log some messages
 logger.debug("This is a debug message")
