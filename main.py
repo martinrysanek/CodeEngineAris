@@ -88,8 +88,8 @@ string_handler.setFormatter(custom_formatter)
 logger.addHandler(string_handler)
 
 # Log some messages
-logger.debug("This is a debug message")
-logger.info("This is an info message")
+# logger.debug("This is a debug message")
+logger.info("Custom Extension of Watson Assistant to get information from ARES")
 # logger.warning("This is a warning message")
 # logger.error("This is an error message")
 # logger.critical("This is a critical message")
