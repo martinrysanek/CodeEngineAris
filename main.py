@@ -59,14 +59,14 @@ def aris():
   ico_string = request.args.get('ico')  
   if not (type(ico_string) is str and ico_string.isdigit()):
       return "Not valid ICO format"
-  logger.debug("ICO: " + ico_string)
+  logger.info("ICO: " + ico_string)
   response = urllib.request.urlopen(url+ico_string.strip())
   data = response.read()
   # Parse the XML string
   root = ET.fromstring(data)
   # Example: Display all attributes for the 'person' tag throughout the XML tree
   name = find_and_display_attributes(root, 'OF')
-  logger.debug("NAME: " + name)
+  logger.info("NAME: " + name)
   return name
 
 # Configure logging with a custom log message format
