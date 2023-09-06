@@ -39,7 +39,9 @@ def find_and_display_attributes(element, tag_name):
 def log():
     global string_handler
     # Retrieve the log messages as a single string
-    return (string_handler.log_output)
+    html_in = "<HTML><BODY>"
+    html_out = "</BODY></HTML>"
+    return (html_in + string_handler.log_output + html_out)
 
 # set up root route
 @app.route("/", methods=['GET'])
